@@ -45,6 +45,9 @@ Donc le dernier élément (au sommet) de notre pile aura l'adresse mémoire
 de l'avant dernier élément.
 
 ### en python
+Même si Python implémente déjà les piles avec le type `list`, je vais quand
+vous monntrer l'implémentation de façon explicite.
+
 ```python
 class Stack:
     """Implementation of a stack
@@ -83,6 +86,18 @@ class Stack:
         return len(self.items) == 0
 ```
 
+Exemple d'utilisation :
+
+```python
+stack = Stack()
+stack.push(1)
+stack.push(2)
+stack.push(3)
+print(stack.pop())  # Print: 3
+print(stack.peek())  # Print: 2
+print(stack.is_empty())  # Print False
+```
+
 ## Applications
 Les piles sont utilisées dans de nombreux algorithmes et applications.
 Voici quelques exemples :
@@ -90,5 +105,48 @@ Voici quelques exemples :
 1. Partage de données entre fonctions :
 - Passage des arguments à des fonctions récursives.
 - Gestion du contexte d'exécution dans les langages interprétés.
+- Gestion des blocs et des portées des variables dans un language
+de programmation.
 
-2.
+2. Backtracking :
+- Enregistrement des choix ou actions effectuées pour revenir en arrière
+en cas d'échec.
+
+3. Gestion des appels de fonctions :
+Au cour de l'exécution d'un programme informatique, la pile est utilisé
+pour stocker les informations sur les fonctions appelées et leur contexte.
+
+## Problèmes algorithmiques
+Quelques problèmes algorithmiques résolue avec les piles :
+
+1. Vérification des parenthèses équilibrées :
+- Problème : Déterminer si une expression contenant des parenthèses,
+crochets et accolades est correctement équilibrée. C'est à dire : vérifier
+si toutes les parenthèses ouvertes sont correctement fermées.
+- Solution : Parcourir la chaîne, empiler les caractères ouvrants
+et dépiler lorsqu'un caractère fermant correspondant est rencontré.
+
+```python
+def is_balanced(expression):
+    """
+    Function to check if all open characters were closed
+    on an expression.
+
+    :param expression: The expression to parse.
+    :type expression: `str`
+    :rtype: `bool`
+    """
+    stack = Stack()
+    opening = "({["
+    closing = ")}]"
+    pairs = {")": "(", "}": "{", "]": "["}
+
+    for char in expression:
+        if char in opening:
+            stack.push(char)
+        elif char in closing:
+            if stack.is_empty() or stack.pop() != pairs[char]:
+                return False
+
+    return stack.is_empty()
+```
