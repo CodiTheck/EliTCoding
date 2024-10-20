@@ -1,7 +1,7 @@
-# Les Pile
+# Les Piles
 Une pile (Stack, en anglais) est une structure de données linéaire
 qui suit le principe
-**LIFO**c(Last In First Out). Cela signifie que le dernier élément ajouté
+**LIFO**(Last In First Out). Cela signifie que le dernier élément ajouté
 à une pile
 est le premier élément retiré. Pronons l'exemple d'une **pile** d'assiettes :
 on empile les assiettes les unes sur les autres, et pour prendre une assiette,
@@ -58,7 +58,7 @@ class Stack:
     def push(self, item):
         """Add an new item into stack
 
-        :param item: The new item will be added.
+        :param item: The new item that will be added.
         """
         self.items.append(item)
 
@@ -72,6 +72,7 @@ class Stack:
     def peek(self):
         """
         Get the last added item without remove it.
+        This stack will return `None` if it is empty.
         """
         if not self.is_empty():
             return self.items[-1]
